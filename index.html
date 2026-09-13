@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KBRDROPS — Catálogo Oficial</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Model Viewer -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+  <!-- Google Fonts (Syne + Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#000000',
+              dark: '#0A0A0A',
+              zinc: '#18181B',
+              gray: '#A1A1AA',
+              white: '#FFFFFF'
+            }
+          },
+          fontFamily: {
+            heading: ['Syne', 'sans-serif'],
+            body: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #000000;
+      color: #FFFFFF;
+      /* Luces difusas de fondo en blanco y gris neutro */
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.08) 0%, transparent 35%),
+        radial-gradient(circle at 85% 65%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+
+    h1, h2, h3, .brand-font {
+      font-family: 'Syne', sans-serif;
+    }
+
+    /* GLASSMORPHISM BLANCO Y NEGRO ESTILO IPHONE */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .glass-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-btn {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: #FFFFFF;
+    }
+
+    .glass-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 8px 25px rgba(255, 255, 255, 0.2);
+    }
+
+    /* Botón Primario Blanco Puro */
+    .glass-btn-primary {
+      background: #FFFFFF;
+      color: #000000;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid #FFFFFF;
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-btn-primary:hover {
+      background: #E5E5E5;
+      box-shadow: 0 12px 35px rgba(255, 255, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 480px;
+      --poster-color: transparent;
+    }
+  </style>
+</head>
+<body class="text-white min-h-screen flex flex-col justify-between">
+
+  <!-- NAVBAR ESTILO IPHONE (BLANCO & NEGRO) -->
+  <header class="sticky top-0 z-50 px-4 py-3">
+    <div class="max-w-7xl mx-auto glass-panel rounded-full px-6 py-3 flex items-center justify-between">
+      
+      <!-- LOGO -->
+      <a href="#catalogo" class="flex items-center space-x-3 group">
+        <img src="https://lh3.googleusercontent.com/d/1UkDcx0ajdqFL3fL2FEpEfitrDumiuiv6" alt="KBRDROPS Logo" class="h-9 w-9 object-cover rounded-full border border-white/30 group-hover:border-white transition">
+        <span class="brand-font text-xl font-extrabold tracking-wider text-white">
+          KBR<span class="text-zinc-400">DROPS</span>
+        </span>
+      </a>
+
+      <!-- NAVEGACIÓN -->
+      <nav class="hidden md:flex space-x-8 text-xs font-semibold tracking-widest uppercase">
+        <a href="#catalogo" class="text-zinc-300 hover:text-white transition-colors">Catálogo</a>
+        <a href="#producto-detalle" class="text-zinc-300 hover:text-white transition-colors">Producto</a>
+      </nav>
+
+      <!-- BOTONES ACCIÓN CON GLASS EFFECT -->
+      <div class="flex items-center space-x-3">
+        <a href="https://www.instagram.com/kbr.drops/" target="_blank" rel="noopener noreferrer" class="glass-btn px-4 py-2 rounded-full text-xs font-semibold flex items-center space-x-2">
+          <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+          <span class="hidden sm:inline">Instagram</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- SECCIÓN 1: CATÁLOGO PRINCIPAL CON BANNER GLASS -->
+    <section id="catalogo" class="max-w-7xl mx-auto px-6 py-10 lg:py-14 space-y-12">
+      
+      <!-- HERO BANNER IPHONE GLASS -->
+      <div class="glass-card rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-60 h-60 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-60 h-60 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <span class="inline-block glass-btn px-4 py-1.5 rounded-full text-zinc-300 font-semibold tracking-widest text-xs uppercase mb-4">
+          Colección Exclusiva 2026
+        </span>
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white">
+          CATÁLOGO DE <span class="text-zinc-400">DROPS</span>
+        </h1>
+        <p class="text-zinc-400 text-sm sm:text-base max-w-xl mx-auto mt-4 font-light">
+          Diseño minimalista y vanguardista. Selecciona cualquier modelo para ver sus fotos detalladas y modelo 3D.
+        </p>
+      </div>
+
+      <!-- GRID DE PRODUCTOS -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- CARD 1 -->
+        <div onclick="verProducto(
+               'KBR RUNNER MOKA \'26', 
+               '$220 USD', 
+               'Edición limitada de 150 pares. Piel de gamuza prémium con acentos chocolate y crema.', 
+               'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80',
+               'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80',
+               'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80',
+               'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb'
+             )" 
+             class="group cursor-pointer glass-card rounded-3xl overflow-hidden hover:scale-[1.02] transition-all duration-300">
+          <div class="h-72 bg-gradient-to-b from-white/10 to-transparent flex items-center justify-center p-6 relative">
+            <span class="absolute top-4 left-4 glass-btn-primary font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Destacado</span>
+            <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80" alt="KBR Runner Moka" class="object-contain h-full group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-6">
+            <span class="text-xs text-zinc-400 font-medium uppercase tracking-wider">Drop #042</span>
+            <h3 class="font-bold text-xl text-white mt-1">KBR Runner Moka '26</h3>
+            <p class="text-zinc-400 text-xs mt-1">Chocolate / Crema / Negro</p>
+            <div class="flex justify-between items-center mt-6 pt-4 border-t border-white/10">
+              <span class="font-bold text-lg text-white">$220 USD</span>
+              <span class="glass-btn px-4 py-1.5 rounded-full text-xs font-semibold group-hover:bg-white/20 transition">
+                Ver Detalles →
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div onclick="verProducto(
+               'KBR LOW DARK ESPRESSO', 
+               '$195 USD', 
+               'Inspirada en el café espresso. Cuero vacuno negro mate combinado con gamuza marrón roble.', 
+               'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80',
+               'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80',
+               'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80',
+               'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb'
+             )" 
+             class="group cursor-pointer glass-card rounded-3xl overflow-hidden hover:scale-[1.02] transition-all duration-300">
+          <div class="h-72 bg-gradient-to-b from-white/10 to-transparent flex items-center justify-center p-6 relative">
+            <span class="absolute top-4 left-4 glass-btn text-xs px-3 py-1 rounded-full uppercase tracking-wider">Stock Bajo</span>
+            <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=600&q=80" alt="KBR Low Dark Espresso" class="object-contain h-full group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-6">
+            <span class="text-xs text-zinc-400 font-medium uppercase tracking-wider">Drop #041</span>
+            <h3 class="font-bold text-xl text-white mt-1">KBR Low Dark Espresso</h3>
+            <p class="text-zinc-400 text-xs mt-1">Negro Mate / Marrón Roble</p>
+            <div class="flex justify-between items-center mt-6 pt-4 border-t border-white/10">
+              <span class="font-bold text-lg text-white">$195 USD</span>
+              <span class="glass-btn px-4 py-1.5 rounded-full text-xs font-semibold group-hover:bg-white/20 transition">
+                Ver Detalles →
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div onclick="verProducto(
+               'KBR HIGH PHANTOM BROWN', 
+               '$240 USD', 
+               'Perfil alto con máxima amortiguación urbana. Tonos marrones humo con acabado artesanal.', 
+               'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80',
+               'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80',
+               'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80',
+               'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb'
+             )" 
+             class="group cursor-pointer glass-card rounded-3xl overflow-hidden hover:scale-[1.02] transition-all duration-300">
+          <div class="h-72 bg-gradient-to-b from-white/10 to-transparent flex items-center justify-center p-6 relative">
+            <span class="absolute top-4 left-4 glass-btn text-xs px-3 py-1 rounded-full uppercase tracking-wider">Nuevo</span>
+            <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80" alt="KBR High Phantom Brown" class="object-contain h-full group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-6">
+            <span class="text-xs text-zinc-400 font-medium uppercase tracking-wider">Drop #040</span>
+            <h3 class="font-bold text-xl text-white mt-1">KBR High Phantom Brown</h3>
+            <p class="text-zinc-400 text-xs mt-1">Negro / Marrón Humo</p>
+            <div class="flex justify-between items-center mt-6 pt-4 border-t border-white/10">
+              <span class="font-bold text-lg text-white">$240 USD</span>
+              <span class="glass-btn px-4 py-1.5 rounded-full text-xs font-semibold group-hover:bg-white/20 transition">
+                Ver Detalles →
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: DETALLE DEL PRODUCTO SELECCIONADO -->
+    <section id="producto-detalle" class="py-16 scroll-mt-20">
+      <div class="max-w-7xl mx-auto px-6 space-y-16">
+        
+        <!-- VOLVER AL CATÁLOGO -->
+        <div>
+          <a href="#catalogo" class="glass-btn inline-flex items-center text-xs text-zinc-300 px-4 py-2 rounded-full gap-2">
+            ← Volver al catálogo
+          </a>
+        </div>
+
+        <!-- 1. PRIMERO: GALERÍA DE IMÁGENES + INFORMACIÓN -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          
+          <!-- GALERÍA DE FOTOS ESTÁTICAS -->
+          <div class="space-y-4">
+            <!-- Foto principal -->
+            <div class="glass-card rounded-3xl p-6 h-96 flex items-center justify-center overflow-hidden">
+              <img id="foto-principal" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80" alt="Vista Principal Zapatilla" class="object-contain h-full w-full transition duration-300">
+            </div>
+
+            <!-- Miniaturas estáticas estilo Glass -->
+            <div class="grid grid-cols-3 gap-4">
+              <div onclick="cambiarImagenPrincipal(this.children[0].src)" class="cursor-pointer glass-card hover:border-white rounded-2xl p-2 h-24 flex items-center justify-center transition">
+                <img id="thumb-1" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80" class="object-contain h-full w-full">
+              </div>
+              <div onclick="cambiarImagenPrincipal(this.children[0].src)" class="cursor-pointer glass-card hover:border-white rounded-2xl p-2 h-24 flex items-center justify-center transition">
+                <img id="thumb-2" src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80" class="object-contain h-full w-full">
+              </div>
+              <div onclick="cambiarImagenPrincipal(this.children[0].src)" class="cursor-pointer glass-card hover:border-white rounded-2xl p-2 h-24 flex items-center justify-center transition">
+                <img id="thumb-3" src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80" class="object-contain h-full w-full">
+              </div>
+            </div>
+          </div>
+
+          <!-- DETALLES Y COMPRA -->
+          <div class="glass-card rounded-3xl p-8 space-y-6">
+            <div>
+              <span class="text-zinc-400 font-semibold tracking-wider text-xs uppercase">KBRDROPS Exclusive</span>
+              <h2 id="producto-nombre" class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-1 text-white">
+                KBR RUNNER MOKA '26
+              </h2>
+              <p id="producto-precio" class="text-2xl font-bold mt-2 text-white">$220 USD</p>
+            </div>
+
+            <p id="producto-desc" class="text-zinc-300 text-sm leading-relaxed font-light">
+              Diseño urbano minimalista moldeado con tonos chocolate, crema y negro profundo. Fabricadas con piel de gamuza prémium y suela de alta tracción.
+            </p>
+
+            <!-- SELECCIÓN DE TALLES -->
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-zinc-400 mb-3">Selecciona Tu Talla (US)</label>
+              <div class="grid grid-cols-5 gap-2">
+                <button class="glass-btn py-2.5 rounded-xl text-sm font-medium">8</button>
+                <button class="glass-btn py-2.5 rounded-xl text-sm font-medium">8.5</button>
+                <button class="glass-btn-primary py-2.5 rounded-xl text-sm font-bold">9</button>
+                <button class="glass-btn py-2.5 rounded-xl text-sm font-medium">9.5</button>
+                <button class="glass-btn py-2.5 rounded-xl text-sm font-medium">10</button>
+              </div>
+            </div>
+
+            <!-- BOTONES DE COMPRA -->
+            <div class="pt-4 flex flex-col sm:flex-row gap-4">
+              <button class="flex-1 glass-btn-primary font-bold py-4 px-8 rounded-2xl tracking-wide uppercase text-xs">
+                Comprar Ahora
+              </button>
+              <a href="https://www.instagram.com/kbr.drops/" target="_blank" class="glass-btn py-4 px-6 rounded-2xl text-xs font-semibold text-center flex items-center justify-center gap-2">
+                Consultar por Instagram
+              </a>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 pt-6 border-t border-white/10 text-xs text-zinc-400">
+              <div>✔ Envío mundial asegurado</div>
+              <div>✔ Autenticidad 100% Garantizada</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 2. VISOR 3D AL FINAL -->
+        <div class="glass-card rounded-3xl p-8 sm:p-12 space-y-6">
+          <div class="text-center max-w-xl mx-auto">
+            <span class="glass-btn px-3 py-1 rounded-full text-zinc-300 text-xs font-semibold uppercase tracking-widest">
+              Experiencia Inmersiva
+            </span>
+            <h3 class="text-2xl font-bold mt-3">MODELO INTERACTIVO 3D</h3>
+            <p class="text-zinc-400 text-xs mt-2 font-light">Inspecciona el modelo tridimensional, rotando e interactuando en 360 grados.</p>
+          </div>
+
+          <div class="relative bg-gradient-to-b from-white/10 to-transparent rounded-2xl p-6 flex flex-col justify-center items-center">
+            
+            <model-viewer 
+              id="shoe-viewer"
+              src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb"
+              alt="KBR Sneaker 3D Model"
+              auto-rotate 
+              camera-controls 
+              shadow-intensity="1.5"
+              shadow-softness="1"
+              exposure="1">
+            </model-viewer>
+
+            <div class="w-full flex justify-between items-center mt-4 pt-4 border-t border-white/10 text-xs text-zinc-400">
+              <span>🔄 Haz clic y arrastra para rotar 360°</span>
+              <span>🔍 Rueda del ratón para Zoom</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER ESTILO GLASS MONOCROMÁTICO -->
+  <footer class="mt-16 px-4 py-8">
+    <div class="max-w-7xl mx-auto glass-panel rounded-3xl px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-zinc-400">
+      <div class="flex items-center space-x-3">
+        <img src="https://lh3.googleusercontent.com/d/1UkDcx0ajdqFL3fL2FEpEfitrDumiuiv6" alt="KBR Logo" class="h-8 w-8 rounded-full border border-white/20">
+        <span>© 2026 KBRDROPS. Todos los derechos reservados.</span>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="https://www.instagram.com/kbr.drops/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">
+          Instagram (@kbr.drops)
+        </a>
+        <a href="#" class="hover:text-white transition">Términos</a>
+        <a href="#" class="hover:text-white transition">Privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT INTERACTIVO -->
+  <script>
+    function verProducto(nombre, precio, descripcion, img1, img2, img3, urlModelo3D) {
+      document.getElementById('producto-nombre').innerText = nombre;
+      document.getElementById('producto-precio').innerText = precio;
+      document.getElementById('producto-desc').innerText = descripcion;
+
+      document.getElementById('foto-principal').src = img1;
+      document.getElementById('thumb-1').src = img1;
+      document.getElementById('thumb-2').src = img2;
+      document.getElementById('thumb-3').src = img3;
+
+      const viewer = document.getElementById('shoe-viewer');
+      if (urlModelo3D) {
+        viewer.setAttribute('src', urlModelo3D);
+      }
+
+      document.getElementById('producto-detalle').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function cambiarImagenPrincipal(src) {
+      document.getElementById('foto-principal').src = src;
+    }
+  </script>
+
+</body>
+</html>
