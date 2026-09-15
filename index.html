@@ -50,7 +50,7 @@
       font-family: 'Syne', sans-serif;
     }
 
-    /* GLASSMORPHISM BLANCO Y NEGRO ESTILO IPHONE */
+    /* GLASSMORPHISM */
     .glass-panel {
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(20px);
@@ -82,7 +82,6 @@
       border-color: rgba(255, 255, 255, 0.5);
     }
 
-    /* Botón Primario Blanco Puro */
     .glass-btn-primary {
       background: #FFFFFF;
       color: #000000;
@@ -107,11 +106,9 @@
 </head>
 <body class="text-white min-h-screen flex flex-col justify-between overflow-x-hidden pb-16 sm:pb-0">
 
-  <!-- NAVBAR ESTILO IPHONE (FLOTANTE EN MÓVIL) -->
+  <!-- NAVBAR -->
   <header class="sticky top-0 z-50 px-3 py-3 sm:px-4">
     <div class="max-w-7xl mx-auto glass-panel rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between">
-      
-      <!-- LOGO -->
       <a href="#catalogo" class="flex items-center space-x-2 sm:space-x-3">
         <img src="https://lh3.googleusercontent.com/d/1UkDcx0ajdqFL3fL2FEpEfitrDumiuiv6" alt="KBRDROPS Logo" class="h-8 w-8 sm:h-9 sm:w-9 object-cover rounded-full border border-white/30">
         <span class="brand-font text-lg sm:text-xl font-extrabold tracking-wider text-white">
@@ -119,13 +116,11 @@
         </span>
       </a>
 
-      <!-- NAVEGACIÓN DESKTOP -->
       <nav class="hidden md:flex space-x-8 text-xs font-semibold tracking-widest uppercase">
         <a href="#catalogo" class="text-zinc-300 hover:text-white transition-colors">Catálogo</a>
         <a href="#producto-detalle" class="text-zinc-300 hover:text-white transition-colors">Producto</a>
       </nav>
 
-      <!-- BOTÓN INSTAGRAM EN NAVBAR -->
       <div class="flex items-center space-x-2">
         <a href="https://www.instagram.com/kbr.drops/" target="_blank" rel="noopener noreferrer" class="glass-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-semibold flex items-center space-x-2">
           <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -138,10 +133,10 @@
   </header>
 
   <main>
-    <!-- SECCIÓN 1: CATÁLOGO PRINCIPAL -->
+    <!-- CATÁLOGO PRINCIPAL -->
     <section id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8 sm:space-y-12">
       
-      <!-- HERO BANNER IPHONE GLASS -->
+      <!-- HERO BANNER -->
       <div class="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-12 text-center relative overflow-hidden">
         <div class="absolute -top-24 -left-24 w-40 sm:w-60 h-40 sm:h-60 bg-white/10 rounded-full blur-2xl sm:blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-40 sm:w-60 h-40 sm:h-60 bg-white/5 rounded-full blur-2xl sm:blur-3xl pointer-events-none"></div>
@@ -157,146 +152,57 @@
         </p>
       </div>
 
-      <!-- GRID DE PRODUCTOS (1 Columna en móvil, 2 en Tablet, 3 en Desktop) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        
-        <!-- CARD 1 -->
-        <div onclick="verProducto(
-               'KBR RUNNER MOKA \'26', 
-               '$220 USD', 
-               'Edición limitada de 150 pares. Piel de gamuza prémium con acentos chocolate y crema.', 
-               'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80',
-               'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80',
-               'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80',
-               'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb'
-             )" 
-             class="group cursor-pointer glass-card rounded-2xl sm:rounded-3xl overflow-hidden active:scale-[0.98] sm:hover:scale-[1.02] transition-all duration-300">
-          <div class="h-60 sm:h-72 bg-gradient-to-b from-white/10 to-transparent flex items-center justify-center p-4 sm:p-6 relative">
-            <span class="absolute top-3 left-3 sm:top-4 sm:left-4 glass-btn-primary font-bold text-[10px] sm:text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full uppercase tracking-wider">Destacado</span>
-            <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80" alt="KBR Runner Moka" class="object-contain h-full w-full group-hover:scale-105 transition duration-500">
-          </div>
-          <div class="p-5 sm:p-6">
-            <span class="text-[10px] sm:text-xs text-zinc-400 font-medium uppercase tracking-wider">Drop #042</span>
-            <h3 class="font-bold text-lg sm:text-xl text-white mt-0.5">KBR Runner Moka '26</h3>
-            <p class="text-zinc-400 text-xs mt-0.5">Chocolate / Crema / Negro</p>
-            <div class="flex justify-between items-center mt-5 pt-3.5 border-t border-white/10">
-              <span class="font-bold text-base sm:text-lg text-white">$220 USD</span>
-              <span class="glass-btn px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs font-semibold">
-                Ver Detalles →
-              </span>
-            </div>
-          </div>
+      <!-- GRID DINÁMICO DESDE GOOGLE SHEETS -->
+      <div id="grid-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div class="col-span-full text-center py-12">
+          <p class="text-zinc-400 animate-pulse">Cargando catálogo en tiempo real desde Google Sheets...</p>
         </div>
-
-        <!-- CARD 2 -->
-        <div onclick="verProducto(
-               'KBR LOW DARK ESPRESSO', 
-               '$195 USD', 
-               'Inspirada en el café espresso. Cuero vacuno negro mate combinado con gamuza marrón roble.', 
-               'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80',
-               'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80',
-               'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80',
-               'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb'
-             )" 
-             class="group cursor-pointer glass-card rounded-2xl sm:rounded-3xl overflow-hidden active:scale-[0.98] sm:hover:scale-[1.02] transition-all duration-300">
-          <div class="h-60 sm:h-72 bg-gradient-to-b from-white/10 to-transparent flex items-center justify-center p-4 sm:p-6 relative">
-            <span class="absolute top-3 left-3 sm:top-4 sm:left-4 glass-btn text-[10px] sm:text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full uppercase tracking-wider">Stock Bajo</span>
-            <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=600&q=80" alt="KBR Low Dark Espresso" class="object-contain h-full w-full group-hover:scale-105 transition duration-500">
-          </div>
-          <div class="p-5 sm:p-6">
-            <span class="text-[10px] sm:text-xs text-zinc-400 font-medium uppercase tracking-wider">Drop #041</span>
-            <h3 class="font-bold text-lg sm:text-xl text-white mt-0.5">KBR Low Dark Espresso</h3>
-            <p class="text-zinc-400 text-xs mt-0.5">Negro Mate / Marrón Roble</p>
-            <div class="flex justify-between items-center mt-5 pt-3.5 border-t border-white/10">
-              <span class="font-bold text-base sm:text-lg text-white">$195 USD</span>
-              <span class="glass-btn px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs font-semibold">
-                Ver Detalles →
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 3 -->
-        <div onclick="verProducto(
-               'KBR HIGH PHANTOM BROWN', 
-               '$240 USD', 
-               'Perfil alto con máxima amortiguación urbana. Tonos marrones humo con acabado artesanal.', 
-               'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80',
-               'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80',
-               'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80',
-               'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb'
-             )" 
-             class="group cursor-pointer glass-card rounded-2xl sm:rounded-3xl overflow-hidden active:scale-[0.98] sm:hover:scale-[1.02] transition-all duration-300">
-          <div class="h-60 sm:h-72 bg-gradient-to-b from-white/10 to-transparent flex items-center justify-center p-4 sm:p-6 relative">
-            <span class="absolute top-3 left-3 sm:top-4 sm:left-4 glass-btn text-[10px] sm:text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full uppercase tracking-wider">Nuevo</span>
-            <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80" alt="KBR High Phantom Brown" class="object-contain h-full w-full group-hover:scale-105 transition duration-500">
-          </div>
-          <div class="p-5 sm:p-6">
-            <span class="text-[10px] sm:text-xs text-zinc-400 font-medium uppercase tracking-wider">Drop #040</span>
-            <h3 class="font-bold text-lg sm:text-xl text-white mt-0.5">KBR High Phantom Brown</h3>
-            <p class="text-zinc-400 text-xs mt-0.5">Negro / Marrón Humo</p>
-            <div class="flex justify-between items-center mt-5 pt-3.5 border-t border-white/10">
-              <span class="font-bold text-base sm:text-lg text-white">$240 USD</span>
-              <span class="glass-btn px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs font-semibold">
-                Ver Detalles →
-              </span>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
 
-    <!-- SECCIÓN 2: DETALLE DEL PRODUCTO SELECCIONADO -->
+    <!-- DETALLE DEL PRODUCTO SELECCIONADO -->
     <section id="producto-detalle" class="py-10 sm:py-16 scroll-mt-16 sm:scroll-mt-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-10 sm:space-y-16">
         
-        <!-- VOLVER AL CATÁLOGO -->
         <div>
           <a href="#catalogo" class="glass-btn inline-flex items-center text-xs text-zinc-300 px-3.5 py-2 rounded-full gap-2">
             ← Volver al catálogo
           </a>
         </div>
 
-        <!-- GALERÍA + DETALLES -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
           
-          <!-- GALERÍA DE FOTOS ESTÁTICAS -->
           <div class="space-y-3 sm:space-y-4">
-            <!-- Foto principal -->
             <div class="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 h-72 sm:h-96 flex items-center justify-center overflow-hidden">
-              <img id="foto-principal" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80" alt="Vista Principal Zapatilla" class="object-contain h-full w-full transition duration-300">
+              <img id="foto-principal" src="" alt="Vista Principal Zapatilla" class="object-contain h-full w-full transition duration-300">
             </div>
 
-            <!-- Miniaturas estáticas estilo Glass -->
             <div class="grid grid-cols-3 gap-2 sm:gap-4">
               <div onclick="cambiarImagenPrincipal(this.children[0].src)" class="cursor-pointer glass-card hover:border-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 h-20 sm:h-24 flex items-center justify-center transition active:scale-95">
-                <img id="thumb-1" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80" class="object-contain h-full w-full">
+                <img id="thumb-1" src="" class="object-contain h-full w-full">
               </div>
               <div onclick="cambiarImagenPrincipal(this.children[0].src)" class="cursor-pointer glass-card hover:border-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 h-20 sm:h-24 flex items-center justify-center transition active:scale-95">
-                <img id="thumb-2" src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80" class="object-contain h-full w-full">
+                <img id="thumb-2" src="" class="object-contain h-full w-full">
               </div>
               <div onclick="cambiarImagenPrincipal(this.children[0].src)" class="cursor-pointer glass-card hover:border-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 h-20 sm:h-24 flex items-center justify-center transition active:scale-95">
-                <img id="thumb-3" src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80" class="object-contain h-full w-full">
+                <img id="thumb-3" src="" class="object-contain h-full w-full">
               </div>
             </div>
           </div>
 
-          <!-- DETALLES Y COMPRA -->
           <div class="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 space-y-5 sm:space-y-6">
             <div>
               <span class="text-zinc-400 font-semibold tracking-wider text-[10px] sm:text-xs uppercase">KBRDROPS Exclusive</span>
               <h2 id="producto-nombre" class="text-2xl sm:text-4xl font-extrabold tracking-tight mt-1 text-white">
-                KBR RUNNER MOKA '26
+                Cargando...
               </h2>
-              <p id="producto-precio" class="text-xl sm:text-2xl font-bold mt-1.5 text-white">$220 USD</p>
+              <p id="producto-precio" class="text-xl sm:text-2xl font-bold mt-1.5 text-white">-</p>
             </div>
 
             <p id="producto-desc" class="text-zinc-300 text-xs sm:text-sm leading-relaxed font-light">
-              Diseño urbano minimalista moldeado con tonos chocolate, crema y negro profundo. Fabricadas con piel de gamuza prémium y suela de alta tracción.
+              Selecciona un modelo del catálogo para visualizar las fotos detalladas.
             </p>
 
-            <!-- SELECCIÓN DE TALLES (OPTIMIZADO PARA SWIPE / TOUCH) -->
             <div>
               <label class="block text-[11px] sm:text-xs uppercase tracking-widest text-zinc-400 mb-2.5">Selecciona Tu Talla (US)</label>
               <div class="grid grid-cols-5 gap-1.5 sm:gap-2">
@@ -308,7 +214,6 @@
               </div>
             </div>
 
-            <!-- BOTONES DE COMPRA -->
             <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button class="w-full flex-1 glass-btn-primary font-bold py-3.5 sm:py-4 px-6 rounded-xl sm:rounded-2xl tracking-wide uppercase text-xs">
                 Comprar Ahora
@@ -326,7 +231,6 @@
 
         </div>
 
-        <!-- 2. VISOR 3D (ALTURA ADAPTADA PARA MÓVIL) -->
         <div class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-12 space-y-4 sm:space-y-6">
           <div class="text-center max-w-xl mx-auto">
             <span class="glass-btn px-3 py-1 rounded-full text-zinc-300 text-[10px] sm:text-xs font-semibold uppercase tracking-widest">
@@ -337,10 +241,9 @@
           </div>
 
           <div class="relative bg-gradient-to-b from-white/10 to-transparent rounded-xl sm:rounded-2xl p-2 sm:p-6 flex flex-col justify-center items-center h-[340px] sm:h-[480px]">
-            
             <model-viewer 
               id="shoe-viewer"
-              src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb"
+              src=""
               alt="KBR Sneaker 3D Model"
               auto-rotate 
               camera-controls 
@@ -360,7 +263,6 @@
     </section>
   </main>
 
-  <!-- FOOTER ESTILO GLASS MONOCROMÁTICO -->
   <footer class="mt-8 sm:mt-16 px-3 sm:px-4 py-6">
     <div class="max-w-7xl mx-auto glass-panel rounded-2xl sm:rounded-3xl px-5 py-5 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] sm:text-xs text-zinc-400">
       <div class="flex items-center space-x-3">
@@ -371,51 +273,95 @@
         <a href="https://www.instagram.com/kbr.drops/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">
           Instagram (@kbr.drops)
         </a>
-        <a href="#" class="hover:text-white transition">Términos</a>
-        <a href="#" class="hover:text-white transition">Privacidad</a>
       </div>
     </div>
   </footer>
 
-  <!-- BARRA DE NAVEGACIÓN INFERIOR TIPO IPHONE (SOLO VISIBLE EN PANTALLAS MÓVILES) -->
-  <div class="fixed bottom-3 left-0 right-0 z-50 px-6 sm:hidden">
-    <div class="glass-panel rounded-full py-2.5 px-6 flex justify-around items-center">
-      <a href="#catalogo" class="text-xs font-semibold text-white flex flex-col items-center gap-0.5">
-        <span>👟</span>
-        <span>Catálogo</span>
-      </a>
-      <div class="w-px h-5 bg-white/20"></div>
-      <a href="#producto-detalle" class="text-xs font-semibold text-zinc-300 flex flex-col items-center gap-0.5">
-        <span>🔍</span>
-        <span>Ver Par</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- SCRIPT INTERACTIVO -->
   <script>
-    function verProducto(nombre, precio, descripcion, img1, img2, img3, urlModelo3D) {
-      document.getElementById('producto-nombre').innerText = nombre;
-      document.getElementById('producto-precio').innerText = precio;
-      document.getElementById('producto-desc').innerText = descripcion;
+    // URL de tu Web App desplegada
+    const API_URL = "https://script.google.com/macros/s/AKfycbyBXwoRT4z5ITGDGSvIEN3mJknK6yAlysg4hO3OxAGzcxwxOyU_hD7WmxdbHahFcZSlaQ/exec?api=obtenerProductos";
 
-      document.getElementById('foto-principal').src = img1;
-      document.getElementById('thumb-1').src = img1;
-      document.getElementById('thumb-2').src = img2;
-      document.getElementById('thumb-3').src = img3;
+    window.addEventListener('DOMContentLoaded', () => {
+      cargarCatalogo();
+    });
+
+    function cargarCatalogo() {
+      fetch(API_URL)
+        .then(res => res.json())
+        .then(productos => {
+          renderizarTarjetas(productos);
+          if (productos && productos.length > 0) {
+            verProducto(productos[0]);
+          }
+        })
+        .catch(error => {
+          console.error("Error al obtener los datos de la hoja:", error);
+          document.getElementById('grid-productos').innerHTML = `
+            <div class="col-span-full text-center py-12 text-red-400">
+              Ocurrió un error al cargar el catálogo.
+            </div>
+          `;
+        });
+    }
+
+    function renderizarTarjetas(productos) {
+      const container = document.getElementById('grid-productos');
+      container.innerHTML = '';
+
+      if (!productos || productos.length === 0) {
+        container.innerHTML = '<p class="col-span-full text-center text-zinc-400">No hay productos registrados en Google Sheets.</p>';
+        return;
+      }
+
+      productos.forEach(p => {
+        const card = document.createElement('div');
+        card.className = "group cursor-pointer glass-card rounded-2xl sm:rounded-3xl overflow-hidden active:scale-[0.98] sm:hover:scale-[1.02] transition-all duration-300";
+        card.onclick = () => verProducto(p);
+
+        card.innerHTML = `
+          <div class="h-60 sm:h-72 bg-gradient-to-b from-white/10 to-transparent flex items-center justify-center p-4 sm:p-6 relative">
+            <span class="absolute top-3 left-3 sm:top-4 sm:left-4 glass-btn-primary font-bold text-[10px] sm:text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full uppercase tracking-wider">
+              Drop #${String(p.id).padStart(3, '0')}
+            </span>
+            <img src="${p.foto1}" alt="${p.nombre}" class="object-contain h-full w-full group-hover:scale-105 transition duration-500">
+          </div>
+          <div class="p-5 sm:p-6">
+            <h3 class="font-bold text-lg sm:text-xl text-white mt-0.5">${p.nombre}</h3>
+            <div class="flex justify-between items-center mt-5 pt-3.5 border-t border-white/10">
+              <span class="font-bold text-base sm:text-lg text-white">${p.precio}</span>
+              <span class="glass-btn px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs font-semibold">
+                Ver Detalles →
+              </span>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function verProducto(p) {
+      document.getElementById('producto-nombre').innerText = p.nombre || '';
+      document.getElementById('producto-precio').innerText = p.precio || '';
+      document.getElementById('producto-desc').innerText = p.descripcion || '';
+
+      document.getElementById('foto-principal').src = p.foto1 || '';
+      document.getElementById('thumb-1').src = p.foto1 || '';
+      document.getElementById('thumb-2').src = p.foto2 || p.foto1 || '';
+      document.getElementById('thumb-3').src = p.foto3 || p.foto1 || '';
 
       const viewer = document.getElementById('shoe-viewer');
-      if (urlModelo3D) {
-        viewer.setAttribute('src', urlModelo3D);
+      if (p.modelo3d) {
+        viewer.setAttribute('src', p.modelo3d);
       }
 
       document.getElementById('producto-detalle').scrollIntoView({ behavior: 'smooth' });
     }
 
     function cambiarImagenPrincipal(src) {
-      document.getElementById('foto-principal').src = src;
+      if (src) {
+        document.getElementById('foto-principal').src = src;
+      }
     }
   </script>
-
 </body>
 </html>
