@@ -4,11 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>KBRDROPS — Catálogo Oficial</title>
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Model Viewer -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-  <!-- Google Fonts (Syne + Inter) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
@@ -46,9 +43,7 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    h1, h2, h3, .brand-font {
-      font-family: 'Syne', sans-serif;
-    }
+    h1, h2, h3, .brand-font { font-family: 'Syne', sans-serif; }
 
     .glass-panel {
       background: rgba(255, 255, 255, 0.05);
@@ -102,7 +97,6 @@
       --poster-color: transparent;
     }
 
-    /* Previene selección de texto en imágenes y botones para evitar congelamiento */
     img, button {
       user-select: none;
       -webkit-user-drag: none;
@@ -140,8 +134,6 @@
   <main>
     <!-- CATÁLOGO PRINCIPAL -->
     <section id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8 sm:space-y-12">
-      
-      <!-- HERO BANNER -->
       <div class="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-12 text-center relative overflow-hidden">
         <div class="absolute -top-24 -left-24 w-40 sm:w-60 h-40 sm:h-60 bg-white/10 rounded-full blur-2xl sm:blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-40 sm:w-60 h-40 sm:h-60 bg-white/5 rounded-full blur-2xl sm:blur-3xl pointer-events-none"></div>
@@ -157,18 +149,16 @@
         </p>
       </div>
 
-      <!-- GRID DINÁMICO -->
       <div id="grid-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         <div class="col-span-full text-center py-12">
-          <p class="text-zinc-400 animate-pulse">Cargando catálogo en tiempo real desde Google Sheets...</p>
+          <p class="text-zinc-400 animate-pulse">Cargando catálogo en tiempo real...</p>
         </div>
       </div>
     </section>
 
-    <!-- DETALLE DEL PRODUCTO SELECCIONADO -->
+    <!-- DETALLE DEL PRODUCTO -->
     <section id="producto-detalle" class="py-10 sm:py-16 scroll-mt-16 sm:scroll-mt-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-10 sm:space-y-16">
-        
         <div>
           <a href="#catalogo" class="glass-btn inline-flex items-center text-xs text-zinc-300 px-3.5 py-2 rounded-full gap-2">
             ← Volver al catálogo
@@ -177,32 +167,21 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
           
-          <!-- GALERÍA DETALLE CON CONTROLES MANUALES -->
+          <!-- GALERÍA DINÁMICA DE DETALLE -->
           <div class="space-y-3 sm:space-y-4">
             <div class="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 h-72 sm:h-96 flex items-center justify-center overflow-hidden relative">
               <img id="foto-principal" src="" alt="Vista Principal Zapatilla" class="object-contain h-full w-full transition-opacity duration-300 pointer-events-none">
               
-              <!-- Botones de Navegación Manual (Anterior / Siguiente) -->
-              <button onclick="cambiarImagenDetalle(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 glass-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-lg z-10 active:scale-90 select-none">
+              <button id="btn-prev" onclick="cambiarImagenDetalle(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 glass-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-lg z-10 active:scale-90 select-none">
                 ❮
               </button>
-              <button onclick="cambiarImagenDetalle(1)" class="absolute right-3 top-1/2 -translate-y-1/2 glass-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-lg z-10 active:scale-90 select-none">
+              <button id="btn-next" onclick="cambiarImagenDetalle(1)" class="absolute right-3 top-1/2 -translate-y-1/2 glass-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-lg z-10 active:scale-90 select-none">
                 ❯
               </button>
             </div>
 
-            <!-- Miniaturas -->
-            <div class="grid grid-cols-3 gap-2 sm:gap-4">
-              <div onclick="seleccionarImagenDetalle(0)" class="cursor-pointer glass-card hover:border-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 h-20 sm:h-24 flex items-center justify-center transition active:scale-95">
-                <img id="thumb-0" src="" class="object-contain h-full w-full pointer-events-none">
-              </div>
-              <div onclick="seleccionarImagenDetalle(1)" class="cursor-pointer glass-card hover:border-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 h-20 sm:h-24 flex items-center justify-center transition active:scale-95">
-                <img id="thumb-1" src="" class="object-contain h-full w-full pointer-events-none">
-              </div>
-              <div onclick="seleccionarImagenDetalle(2)" class="cursor-pointer glass-card hover:border-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 h-20 sm:h-24 flex items-center justify-center transition active:scale-95">
-                <img id="thumb-2" src="" class="object-contain h-full w-full pointer-events-none">
-              </div>
-            </div>
+            <!-- Contenedor Dinámico de Miniaturas -->
+            <div id="contenedor-thumbs" class="flex flex-wrap gap-2 sm:gap-3 justify-center"></div>
           </div>
 
           <div class="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 space-y-5 sm:space-y-6">
@@ -246,7 +225,7 @@
 
         </div>
 
-        <div class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-12 space-y-4 sm:space-y-6">
+        <div id="seccion-3d" class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-12 space-y-4 sm:space-y-6">
           <div class="text-center max-w-xl mx-auto">
             <span class="glass-btn px-3 py-1 rounded-full text-zinc-300 text-[10px] sm:text-xs font-semibold uppercase tracking-widest">
               Experiencia Inmersiva
@@ -326,15 +305,14 @@
         });
     }
 
-    // Precargar imágenes para evitar parpadeos y congelamiento por clics rápidos
     function precargarImagenes(productos) {
       productos.forEach(p => {
-        [p.foto1, p.foto2, p.foto3].forEach(url => {
-          if (url) {
+        if (p.fotos && Array.isArray(p.fotos)) {
+          p.fotos.forEach(url => {
             const img = new Image();
             img.src = url;
-          }
-        });
+          });
+        }
       });
     }
 
@@ -342,7 +320,6 @@
       const container = document.getElementById('grid-productos');
       container.innerHTML = '';
       
-      // Limpiar intervalos de tarjetas anteriores
       Object.values(intervalosCards).forEach(clearInterval);
       intervalosCards = {};
 
@@ -352,26 +329,26 @@
       }
 
       productos.forEach((p, index) => {
-        const fotos = [p.foto1, p.foto2, p.foto3].filter(Boolean);
+        const fotos = p.fotos || [];
         let fotoIdx = 0;
 
         const card = document.createElement('div');
         card.className = "group cursor-pointer glass-card rounded-2xl sm:rounded-3xl overflow-hidden active:scale-[0.98] sm:hover:scale-[1.02] transition-all duration-300";
         
-        // Manejo defensivo contra congelamiento por doble clic rápido
         card.onclick = (e) => {
           e.preventDefault();
           verProducto(p);
         };
 
         const imgId = `card-img-${index}`;
+        const fotoInicial = fotos.length > 0 ? fotos[0] : '';
 
         card.innerHTML = `
           <div class="h-60 sm:h-72 bg-gradient-to-b from-white/10 to-transparent flex items-center justify-center p-4 sm:p-6 relative">
             <span class="absolute top-3 left-3 sm:top-4 sm:left-4 glass-btn-primary font-bold text-[10px] sm:text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full uppercase tracking-wider">
               Drop #${String(p.id).padStart(3, '0')}
             </span>
-            <img id="${imgId}" src="${p.foto1}" alt="${p.nombre}" class="object-contain h-full w-full group-hover:scale-105 transition-opacity duration-300 pointer-events-none">
+            ${fotoInicial ? `<img id="${imgId}" src="${fotoInicial}" alt="${p.nombre}" class="object-contain h-full w-full group-hover:scale-105 transition-opacity duration-300 pointer-events-none">` : `<span class="text-zinc-500 text-xs">Sin Foto</span>`}
           </div>
           <div class="p-5 sm:p-6">
             <h3 class="font-bold text-lg sm:text-xl text-white mt-0.5">${p.nombre}</h3>
@@ -385,7 +362,7 @@
         `;
         container.appendChild(card);
 
-        // Pase automático cada 2 segundos por producto en el catálogo
+        // Transición de imágenes si existen 2 o más fotos válidas
         if (fotos.length > 1) {
           intervalosCards[index] = setInterval(() => {
             fotoIdx = (fotoIdx + 1) % fotos.length;
@@ -407,28 +384,43 @@
       document.getElementById('producto-precio').innerText = p.precio || '';
       document.getElementById('producto-desc').innerText = p.descripcion || '';
 
-      fotosDetalleActuales = [p.foto1, p.foto2, p.foto3].filter(Boolean);
+      fotosDetalleActuales = p.fotos || [];
       indiceFotoDetalle = 0;
 
-      // Cargar Miniaturas
-      for (let i = 0; i < 3; i++) {
-        const thumb = document.getElementById(`thumb-${i}`);
-        if (thumb) {
-          if (fotosDetalleActuales[i]) {
-            thumb.src = fotosDetalleActuales[i];
-            thumb.parentElement.style.display = 'flex';
-          } else {
-            thumb.parentElement.style.display = 'none';
-          }
-        }
+      // Renderizar miniaturas dinámicas según fotos válidas
+      const containerThumbs = document.getElementById('contenedor-thumbs');
+      containerThumbs.innerHTML = '';
+
+      fotosDetalleActuales.forEach((url, i) => {
+        const thumbBox = document.createElement('div');
+        thumbBox.className = `cursor-pointer glass-card hover:border-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 h-20 sm:h-24 w-20 sm:w-24 flex items-center justify-center transition active:scale-95 ${i === 0 ? 'border-white' : ''}`;
+        thumbBox.onclick = () => seleccionarImagenDetalle(i);
+        thumbBox.innerHTML = `<img src="${url}" class="object-contain h-full w-full pointer-events-none">`;
+        containerThumbs.appendChild(thumbBox);
+      });
+
+      // Mostrar u ocultar botones de navegación según la cantidad de imágenes
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+      if (fotosDetalleActuales.length > 1) {
+        btnPrev.style.display = 'flex';
+        btnNext.style.display = 'flex';
+      } else {
+        btnPrev.style.display = 'none';
+        btnNext.style.display = 'none';
       }
 
       actualizarFotoPrincipalDetalle();
       iniciarPaseAutomaticoDetalle();
 
+      // Ocultar sección 3D si no tiene link
+      const seccion3D = document.getElementById('seccion-3d');
       const viewer = document.getElementById('shoe-viewer');
       if (p.modelo3d) {
+        seccion3D.style.display = 'block';
         viewer.setAttribute('src', p.modelo3d);
+      } else {
+        seccion3D.style.display = 'none';
       }
 
       document.getElementById('producto-detalle').scrollIntoView({ behavior: 'smooth' });
@@ -436,16 +428,30 @@
 
     function actualizarFotoPrincipalDetalle() {
       const imgPrincipal = document.getElementById('foto-principal');
-      if (imgPrincipal && fotosDetalleActuales.length > 0) {
-        imgPrincipal.style.opacity = '0.4';
-        setTimeout(() => {
-          imgPrincipal.src = fotosDetalleActuales[indiceFotoDetalle];
-          imgPrincipal.style.opacity = '1';
-        }, 100);
+      if (imgPrincipal) {
+        if (fotosDetalleActuales.length > 0) {
+          imgPrincipal.style.display = 'block';
+          imgPrincipal.style.opacity = '0.4';
+          setTimeout(() => {
+            imgPrincipal.src = fotosDetalleActuales[indiceFotoDetalle];
+            imgPrincipal.style.opacity = '1';
+          }, 100);
+        } else {
+          imgPrincipal.style.display = 'none';
+        }
       }
+
+      // Resaltar miniatura activa
+      const thumbs = document.getElementById('contenedor-thumbs').children;
+      Array.from(thumbs).forEach((thumb, i) => {
+        if (i === indiceFotoDetalle) {
+          thumb.classList.add('border-white');
+        } else {
+          thumb.classList.remove('border-white');
+        }
+      });
     }
 
-    // Pases automáticos cada 2 segundos en el producto
     function iniciarPaseAutomaticoDetalle() {
       if (intervaloDetalle) clearInterval(intervaloDetalle);
       if (fotosDetalleActuales.length > 1) {
@@ -456,20 +462,18 @@
       }
     }
 
-    // Botones Siguiente / Anterior
     function cambiarImagenDetalle(direccion) {
       if (fotosDetalleActuales.length <= 1) return;
       indiceFotoDetalle = (indiceFotoDetalle + direccion + fotosDetalleActuales.length) % fotosDetalleActuales.length;
       actualizarFotoPrincipalDetalle();
-      iniciarPaseAutomaticoDetalle(); // Reiniciar temporizador de 2s
+      iniciarPaseAutomaticoDetalle();
     }
 
-    // Selección por miniatura
     function seleccionarImagenDetalle(index) {
       if (index < fotosDetalleActuales.length) {
         indiceFotoDetalle = index;
         actualizarFotoPrincipalDetalle();
-        iniciarPaseAutomaticoDetalle(); // Reiniciar temporizador de 2s
+        iniciarPaseAutomaticoDetalle();
       }
     }
   </script>
