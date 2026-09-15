@@ -50,7 +50,6 @@
       font-family: 'Syne', sans-serif;
     }
 
-    /* GLASSMORPHISM */
     .glass-panel {
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(20px);
@@ -102,6 +101,12 @@
       height: 100%;
       --poster-color: transparent;
     }
+
+    /* Previene selección de texto en imágenes y botones para evitar congelamiento */
+    img, button {
+      user-select: none;
+      -webkit-user-drag: none;
+    }
   </style>
 </head>
 <body class="text-white min-h-screen flex flex-col justify-between overflow-x-hidden pb-16 sm:pb-0">
@@ -152,10 +157,10 @@
         </p>
       </div>
 
-      <!-- GRID DINÁMICO DESDE GOOGLE SHEETS -->
+      <!-- GRID DINÁMICO -->
       <div id="grid-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         <div class="col-span-full text-center py-12">
-          <p class="text-zinc-400 animate-pulse">Cargando catálogo...</p>
+          <p class="text-zinc-400 animate-pulse">Cargando catálogo en tiempo real desde Google Sheets...</p>
         </div>
       </div>
     </section>
@@ -172,20 +177,30 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
           
+          <!-- GALERÍA DETALLE CON CONTROLES MANUALES -->
           <div class="space-y-3 sm:space-y-4">
-            <div class="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 h-72 sm:h-96 flex items-center justify-center overflow-hidden">
-              <img id="foto-principal" src="" alt="Vista Principal Zapatilla" class="object-contain h-full w-full transition duration-300">
+            <div class="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 h-72 sm:h-96 flex items-center justify-center overflow-hidden relative">
+              <img id="foto-principal" src="" alt="Vista Principal Zapatilla" class="object-contain h-full w-full transition-opacity duration-300 pointer-events-none">
+              
+              <!-- Botones de Navegación Manual (Anterior / Siguiente) -->
+              <button onclick="cambiarImagenDetalle(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 glass-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-lg z-10 active:scale-90 select-none">
+                ❮
+              </button>
+              <button onclick="cambiarImagenDetalle(1)" class="absolute right-3 top-1/2 -translate-y-1/2 glass-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-lg z-10 active:scale-90 select-none">
+                ❯
+              </button>
             </div>
 
+            <!-- Miniaturas -->
             <div class="grid grid-cols-3 gap-2 sm:gap-4">
-              <div onclick="cambiarImagenPrincipal(this.children[0].src)" class="cursor-pointer glass-card hover:border-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 h-20 sm:h-24 flex items-center justify-center transition active:scale-95">
-                <img id="thumb-1" src="" class="object-contain h-full w-full">
+              <div onclick="seleccionarImagenDetalle(0)" class="cursor-pointer glass-card hover:border-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 h-20 sm:h-24 flex items-center justify-center transition active:scale-95">
+                <img id="thumb-0" src="" class="object-contain h-full w-full pointer-events-none">
               </div>
-              <div onclick="cambiarImagenPrincipal(this.children[0].src)" class="cursor-pointer glass-card hover:border-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 h-20 sm:h-24 flex items-center justify-center transition active:scale-95">
-                <img id="thumb-2" src="" class="object-contain h-full w-full">
+              <div onclick="seleccionarImagenDetalle(1)" class="cursor-pointer glass-card hover:border-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 h-20 sm:h-24 flex items-center justify-center transition active:scale-95">
+                <img id="thumb-1" src="" class="object-contain h-full w-full pointer-events-none">
               </div>
-              <div onclick="cambiarImagenPrincipal(this.children[0].src)" class="cursor-pointer glass-card hover:border-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 h-20 sm:h-24 flex items-center justify-center transition active:scale-95">
-                <img id="thumb-3" src="" class="object-contain h-full w-full">
+              <div onclick="seleccionarImagenDetalle(2)" class="cursor-pointer glass-card hover:border-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 h-20 sm:h-24 flex items-center justify-center transition active:scale-95">
+                <img id="thumb-2" src="" class="object-contain h-full w-full pointer-events-none">
               </div>
             </div>
           </div>
@@ -224,8 +239,8 @@
             </div>
 
             <div class="grid grid-cols-2 gap-2 sm:gap-4 pt-4 sm:pt-6 border-t border-white/10 text-[11px] sm:text-xs text-zinc-400">
-              <div>✔ Envío a toda Argentina</div>
-              <div>✔ Calidad PK & G5</div>
+              <div>✔ Envío mundial asegurado</div>
+              <div>✔ Autenticidad 100% Garantizada</div>
             </div>
           </div>
 
@@ -278,8 +293,13 @@
   </footer>
 
   <script>
-    // URL de tu Web App desplegada
     const API_URL = "https://script.google.com/macros/s/AKfycbyBXwoRT4z5ITGDGSvIEN3mJknK6yAlysg4hO3OxAGzcxwxOyU_hD7WmxdbHahFcZSlaQ/exec?api=obtenerProductos";
+
+    let productosCache = [];
+    let intervalosCards = {};
+    let intervaloDetalle = null;
+    let fotosDetalleActuales = [];
+    let indiceFotoDetalle = 0;
 
     window.addEventListener('DOMContentLoaded', () => {
       cargarCatalogo();
@@ -289,6 +309,8 @@
       fetch(API_URL)
         .then(res => res.json())
         .then(productos => {
+          productosCache = productos;
+          precargarImagenes(productos);
           renderizarTarjetas(productos);
           if (productos && productos.length > 0) {
             verProducto(productos[0]);
@@ -304,26 +326,52 @@
         });
     }
 
+    // Precargar imágenes para evitar parpadeos y congelamiento por clics rápidos
+    function precargarImagenes(productos) {
+      productos.forEach(p => {
+        [p.foto1, p.foto2, p.foto3].forEach(url => {
+          if (url) {
+            const img = new Image();
+            img.src = url;
+          }
+        });
+      });
+    }
+
     function renderizarTarjetas(productos) {
       const container = document.getElementById('grid-productos');
       container.innerHTML = '';
+      
+      // Limpiar intervalos de tarjetas anteriores
+      Object.values(intervalosCards).forEach(clearInterval);
+      intervalosCards = {};
 
       if (!productos || productos.length === 0) {
         container.innerHTML = '<p class="col-span-full text-center text-zinc-400">No hay productos registrados en Google Sheets.</p>';
         return;
       }
 
-      productos.forEach(p => {
+      productos.forEach((p, index) => {
+        const fotos = [p.foto1, p.foto2, p.foto3].filter(Boolean);
+        let fotoIdx = 0;
+
         const card = document.createElement('div');
         card.className = "group cursor-pointer glass-card rounded-2xl sm:rounded-3xl overflow-hidden active:scale-[0.98] sm:hover:scale-[1.02] transition-all duration-300";
-        card.onclick = () => verProducto(p);
+        
+        // Manejo defensivo contra congelamiento por doble clic rápido
+        card.onclick = (e) => {
+          e.preventDefault();
+          verProducto(p);
+        };
+
+        const imgId = `card-img-${index}`;
 
         card.innerHTML = `
           <div class="h-60 sm:h-72 bg-gradient-to-b from-white/10 to-transparent flex items-center justify-center p-4 sm:p-6 relative">
             <span class="absolute top-3 left-3 sm:top-4 sm:left-4 glass-btn-primary font-bold text-[10px] sm:text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full uppercase tracking-wider">
               Drop #${String(p.id).padStart(3, '0')}
             </span>
-            <img src="${p.foto1}" alt="${p.nombre}" class="object-contain h-full w-full group-hover:scale-105 transition duration-500">
+            <img id="${imgId}" src="${p.foto1}" alt="${p.nombre}" class="object-contain h-full w-full group-hover:scale-105 transition-opacity duration-300 pointer-events-none">
           </div>
           <div class="p-5 sm:p-6">
             <h3 class="font-bold text-lg sm:text-xl text-white mt-0.5">${p.nombre}</h3>
@@ -336,6 +384,21 @@
           </div>
         `;
         container.appendChild(card);
+
+        // Pase automático cada 2 segundos por producto en el catálogo
+        if (fotos.length > 1) {
+          intervalosCards[index] = setInterval(() => {
+            fotoIdx = (fotoIdx + 1) % fotos.length;
+            const imgElement = document.getElementById(imgId);
+            if (imgElement) {
+              imgElement.style.opacity = '0.4';
+              setTimeout(() => {
+                imgElement.src = fotos[fotoIdx];
+                imgElement.style.opacity = '1';
+              }, 100);
+            }
+          }, 2000);
+        }
       });
     }
 
@@ -344,10 +407,24 @@
       document.getElementById('producto-precio').innerText = p.precio || '';
       document.getElementById('producto-desc').innerText = p.descripcion || '';
 
-      document.getElementById('foto-principal').src = p.foto1 || '';
-      document.getElementById('thumb-1').src = p.foto1 || '';
-      document.getElementById('thumb-2').src = p.foto2 || p.foto1 || '';
-      document.getElementById('thumb-3').src = p.foto3 || p.foto1 || '';
+      fotosDetalleActuales = [p.foto1, p.foto2, p.foto3].filter(Boolean);
+      indiceFotoDetalle = 0;
+
+      // Cargar Miniaturas
+      for (let i = 0; i < 3; i++) {
+        const thumb = document.getElementById(`thumb-${i}`);
+        if (thumb) {
+          if (fotosDetalleActuales[i]) {
+            thumb.src = fotosDetalleActuales[i];
+            thumb.parentElement.style.display = 'flex';
+          } else {
+            thumb.parentElement.style.display = 'none';
+          }
+        }
+      }
+
+      actualizarFotoPrincipalDetalle();
+      iniciarPaseAutomaticoDetalle();
 
       const viewer = document.getElementById('shoe-viewer');
       if (p.modelo3d) {
@@ -357,9 +434,42 @@
       document.getElementById('producto-detalle').scrollIntoView({ behavior: 'smooth' });
     }
 
-    function cambiarImagenPrincipal(src) {
-      if (src) {
-        document.getElementById('foto-principal').src = src;
+    function actualizarFotoPrincipalDetalle() {
+      const imgPrincipal = document.getElementById('foto-principal');
+      if (imgPrincipal && fotosDetalleActuales.length > 0) {
+        imgPrincipal.style.opacity = '0.4';
+        setTimeout(() => {
+          imgPrincipal.src = fotosDetalleActuales[indiceFotoDetalle];
+          imgPrincipal.style.opacity = '1';
+        }, 100);
+      }
+    }
+
+    // Pases automáticos cada 2 segundos en el producto
+    function iniciarPaseAutomaticoDetalle() {
+      if (intervaloDetalle) clearInterval(intervaloDetalle);
+      if (fotosDetalleActuales.length > 1) {
+        intervaloDetalle = setInterval(() => {
+          indiceFotoDetalle = (indiceFotoDetalle + 1) % fotosDetalleActuales.length;
+          actualizarFotoPrincipalDetalle();
+        }, 2000);
+      }
+    }
+
+    // Botones Siguiente / Anterior
+    function cambiarImagenDetalle(direccion) {
+      if (fotosDetalleActuales.length <= 1) return;
+      indiceFotoDetalle = (indiceFotoDetalle + direccion + fotosDetalleActuales.length) % fotosDetalleActuales.length;
+      actualizarFotoPrincipalDetalle();
+      iniciarPaseAutomaticoDetalle(); // Reiniciar temporizador de 2s
+    }
+
+    // Selección por miniatura
+    function seleccionarImagenDetalle(index) {
+      if (index < fotosDetalleActuales.length) {
+        indiceFotoDetalle = index;
+        actualizarFotoPrincipalDetalle();
+        iniciarPaseAutomaticoDetalle(); // Reiniciar temporizador de 2s
       }
     }
   </script>
