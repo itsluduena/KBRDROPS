@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>KBRDROPS — Catálogo Oficial</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
@@ -91,12 +90,6 @@
       box-shadow: 0 12px 35px rgba(255, 255, 255, 0.4);
     }
 
-    model-viewer {
-      width: 100%;
-      height: 100%;
-      --poster-color: transparent;
-    }
-
     img, button {
       user-select: none;
       -webkit-user-drag: none;
@@ -146,7 +139,7 @@
           CATÁLOGO DE <span class="text-zinc-400">DROPS</span>
         </h1>
         <p class="text-zinc-400 text-xs sm:text-base max-w-xl mx-auto mt-3 sm:mt-4 font-light">
-          Diseño minimalista y vanguardista. Toca cualquier modelo para ver sus fotos detalladas y modelo 3D.
+          Diseño minimalista y vanguardista. Toca cualquier modelo para ver sus fotos detalladas.
         </p>
       </div>
 
@@ -251,34 +244,6 @@
             </div>
           </div>
 
-        </div>
-
-        <div id="seccion-3d" class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-12 space-y-4 sm:space-y-6">
-          <div class="text-center max-w-xl mx-auto">
-            <span class="glass-btn px-3 py-1 rounded-full text-zinc-300 text-[10px] sm:text-xs font-semibold uppercase tracking-widest">
-              Experiencia Inmersiva
-            </span>
-            <h3 class="text-xl sm:text-2xl font-bold mt-2">MODELO INTERACTIVO 3D</h3>
-            <p class="text-zinc-400 text-xs mt-1 font-light">Inspecciona el modelo tridimensional interactuando en 360 grados.</p>
-          </div>
-
-          <div class="relative bg-gradient-to-b from-white/10 to-transparent rounded-xl sm:rounded-2xl p-2 sm:p-6 flex flex-col justify-center items-center h-[340px] sm:h-[480px]">
-            <model-viewer 
-              id="shoe-viewer"
-              src=""
-              alt="KBR Sneaker 3D Model"
-              auto-rotate 
-              camera-controls 
-              shadow-intensity="1.5"
-              shadow-softness="1"
-              exposure="1">
-            </model-viewer>
-
-            <div class="w-full flex justify-between items-center mt-2 pt-3 border-t border-white/10 text-[10px] sm:text-xs text-zinc-400 px-2">
-              <span>👆 Arrastra con un dedo para rotar 360°</span>
-              <span>🔍 Pellizca para Zoom</span>
-            </div>
-          </div>
         </div>
 
       </div>
@@ -437,15 +402,6 @@
 
       actualizarFotoPrincipalDetalle();
       iniciarPaseAutomaticoDetalle();
-
-      const seccion3D = document.getElementById('seccion-3d');
-      const viewer = document.getElementById('shoe-viewer');
-      if (p.modelo3d) {
-        seccion3D.style.display = 'block';
-        viewer.setAttribute('src', p.modelo3d);
-      } else {
-        seccion3D.style.display = 'none';
-      }
 
       document.getElementById('producto-detalle').scrollIntoView({ behavior: 'smooth' });
     }
